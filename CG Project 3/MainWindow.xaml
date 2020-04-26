@@ -1,0 +1,81 @@
+﻿<Window x:Class="CG_Project_3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CG_Project_3" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="MainWindow"  Height="783" Width="975" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+            <Menu Height="25" VerticalAlignment="Top" x:Name="menu" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
+                <MenuItem Header="Main Menu">
+                    <MenuItem Header="Clear image" Click="Clear_Click"/>
+                    <MenuItem Header="Save image" Click="Save_Click"/>
+                    <MenuItem Header="Open image" Click="Open_Click"/>
+                </MenuItem>
+
+            </Menu>
+            <Grid Name="buttons" Grid.Column="0" Grid.Row="1">
+                <Border Name="bor1"  Padding="10" BorderThickness="1"  BorderBrush="black" Background="LightGray"/>
+                <Label Content="Options:" FontSize="20" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                <Label Content="Color:" HorizontalAlignment="Stretch" Margin="10,60,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                <xctk:ColorPicker Name="ColorPicker1"  SelectedColorChanged="ColorPicker1_SelectedColorChanged" Height="30" VerticalAlignment="Top" DisplayColorAndName="True" Margin="10,80,5,0" />
+                <CheckBox Content="Affect clicked one" HorizontalAlignment="Stretch" Margin="10,110,0,0" Name="ColorCheck" />
+                <Border BorderBrush="Gray" Padding="5,5,5,5" Background="LightGray" Height="95" Margin="10,160,10,0" BorderThickness="2" VerticalAlignment="Top">
+                    <DockPanel VerticalAlignment="Top">
+                        <CheckBox Content="Draw/Modify a line" HorizontalAlignment="Stretch" Margin="0,0,0,0"  DockPanel.Dock="Top" Name="LineCheck" Checked="LineCheck_Checked" />
+                        <CheckBox Content="Change thickness on click" HorizontalAlignment="Stretch" Margin="0,10,0,0"  DockPanel.Dock="Top" Name="ChangeLineThickness" />
+                        <Label Content="Thickness:" Margin="0,10,0,0" />
+                        <TextBox Text="{Binding ElementName=LineThickness, Path=Value, UpdateSourceTrigger=PropertyChanged}"  Margin="0,10,0,0" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                        <Slider Minimum="1" Maximum="15" TickPlacement="BottomRight" TickFrequency="1"   Margin="0,10,0,0"  IsSnapToTickEnabled="True" Name="LineThickness" />
+                    </DockPanel>
+                </Border>
+                <Border BorderBrush="Gray" Padding="5,5,5,5" Background="LightGray" Height="95" Margin="10,290,10,0" BorderThickness="2" VerticalAlignment="Top">
+                    <DockPanel VerticalAlignment="Top">
+                        <CheckBox Content="Draw/Modify a circle" HorizontalAlignment="Stretch" Margin="0,0,0,0"  DockPanel.Dock="Top" Name="CircleCheck" Checked="CircleCheck_Checked" />
+                        <CheckBox Content="Change radius on click" HorizontalAlignment="Stretch" Margin="0,10,0,0"  DockPanel.Dock="Top" Name="ChangeRadius" />
+                        <Label Content="Radius:" Margin="0,10,0,0" />
+                        <TextBox Text="{Binding ElementName=CircleRadiuss, Path=Value, UpdateSourceTrigger=PropertyChanged}"  Margin="0,10,0,0" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                        <Slider Minimum="1" Maximum="300" TickPlacement="BottomRight" TickFrequency="1" Value="150" Margin="0,10,0,0"  IsSnapToTickEnabled="True" Name="CircleRadiuss" />
+                    </DockPanel>
+                </Border>
+                <Border BorderBrush="Gray" Padding="5,5,5,5" Background="LightGray" Height="115" Margin="10,420,10,0" BorderThickness="2" VerticalAlignment="Top">
+                    <DockPanel VerticalAlignment="Top">
+                        <CheckBox Content="Draw/Modify a polygon" HorizontalAlignment="Stretch" Margin="0,0,0,0"  DockPanel.Dock="Top" Name="PolyCheck" Checked="PolyCheck_Checked" />
+                        <CheckBox Content="Change thickness on click" HorizontalAlignment="Stretch" Margin="0,10,0,0"  DockPanel.Dock="Top" Name="ChangePolyThickness" />
+                        <CheckBox Content="Move whole polygon" HorizontalAlignment="Stretch" Margin="0,10,0,0"  DockPanel.Dock="Top" Name="MoveWholePoly" />
+                        <Label Content="Thickness:" Margin="0,10,0,0" />
+                        <TextBox Text="{Binding ElementName=PolyThickness, Path=Value, UpdateSourceTrigger=PropertyChanged}"  Margin="0,10,0,0" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                        <Slider Minimum="1" Maximum="15" TickPlacement="BottomRight" TickFrequency="1"  Margin="0,10,0,0"  IsSnapToTickEnabled="True" Name="PolyThickness" />
+                    </DockPanel>
+                </Border>
+                <CheckBox Content="Anti-Alisassing" HorizontalAlignment="Stretch" Margin="10,570,0,0"  DockPanel.Dock="Top" Name="AntiAliasing" Click="AntiAliasing_Click"/>
+
+                <Label Name="test" Content="Position:" Margin="5,640,0,0"/>
+                <Label Name="positionx"  Content="X:   0 px" Margin="5,660,0,0"/>
+                <Label Name="positiony" Content="Y:   0 px" Margin="65,660,0,0"/>
+
+            </Grid>
+            
+           
+            <Grid  Grid.Column="1" Grid.Row="1">
+                <Border Name="bor2" Padding="10" BorderThickness="1"  BorderBrush="black" Background="LightBlue"/>
+                <Image Name="MyImage" Margin="10,10,10,10"/>
+                <Canvas Name="Canvas" Margin="10,10,10,10" MouseMove="Canvas_MouseMove_NotDown" MouseDown="Canvas_MouseDown"  MouseUp="Canvas_MouseUp_Drawing" Background="Transparent"/>
+
+            </Grid>
+            
+
+        </Grid>
+    </Grid>
+</Window>
+
